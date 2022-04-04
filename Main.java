@@ -37,7 +37,7 @@ public class Main {
             case "PAY": {
                 try {
                     for (int i = 0; i < values.size(); i++) {
-                        mServices.pay(values.get(i));
+                        System.out.println("Your available balance: " + mServices.pay(values.get(i)));
                     }
                 } catch (BillNotfoundException e) {
                     System.out.println(e.getMessage());

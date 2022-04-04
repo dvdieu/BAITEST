@@ -5,9 +5,7 @@ import core.WalletPaymentException;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 public class Wallet implements Serializable {
@@ -15,9 +13,9 @@ public class Wallet implements Serializable {
     private BigDecimal balance;
     List<Event> events;
 
-    public Wallet(long id, BigDecimal balance) {
+    public Wallet(long id, long balance) {
         this.id = id;
-        this.balance = balance;
+        this.balance = BigDecimal.valueOf(balance);
         this.events = new ArrayList<>();
         events.add(new Event(System.nanoTime(), System.currentTimeMillis(), EEvent.INIT));
     }

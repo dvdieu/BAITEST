@@ -3,8 +3,6 @@ package port.adapter.repository;
 
 import domain.model.wallet.Wallet;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +12,7 @@ public class WalletRepository implements domain.model.wallet.WalletRepository {
 
     public WalletRepository() {
         this.inmemoryDB = new HashMap<>();
-        this.inmemoryDB.put(1L, new Wallet(1, BigDecimal.ZERO));
+        this.inmemoryDB.put(1L, new Wallet(1, 1000000L));
     }
 
     @Override
@@ -32,6 +30,6 @@ public class WalletRepository implements domain.model.wallet.WalletRepository {
 
     @Override
     public void save(Wallet wallet) {
-        this.inmemoryDB.put(wallet.getId(),wallet);
+        this.inmemoryDB.put(wallet.getId(), wallet);
     }
 }
