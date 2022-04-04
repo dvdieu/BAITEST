@@ -32,7 +32,7 @@ public class Main {
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
-
+                break;
             }
             case "PAY": {
                 try {
@@ -44,9 +44,10 @@ public class Main {
                 } catch (WalletPaymentException e) {
                     e.printStackTrace();
                 }
+                break;
             }
             case "LIST_PAYMENT": {
-
+                break;
             }
         }
     }
