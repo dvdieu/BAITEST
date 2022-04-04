@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MOMO:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MOMO_jar</output-path>
+    <root id="archive" name="MOMO.jar">
+      <element id="module-output" name="MOMO" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,1 @@
+`java -jar ./out/artifacts/MOMO_jar/MOMO.jar CASH_IN 100000`
