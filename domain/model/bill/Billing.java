@@ -1,5 +1,7 @@
 package domain.model.bill;
 
+import core.BillingHasBeenPaidException;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -12,6 +14,15 @@ public class Billing implements Serializable {
     BigDecimal amount;
     Date dueDate;
     EState state;
+
+    public EPROVIDER getProvider() {
+        return provider;
+    }
+
+    public void setProvider(EPROVIDER provider) {
+        this.provider = provider;
+    }
+
     EPROVIDER provider;
     List<BillingHistory> history;
     Long walletId;
@@ -82,5 +93,14 @@ public class Billing implements Serializable {
 
     public void setWalletId(Long walletId) {
         this.walletId = walletId;
+    }
+
+    public void payment() throws BillingHasBeenPaidException {
+        if (this.getState().equals(EState.NOT_PAID)) {
+            this.setState(EState.PROCESSED);
+            this.getHistory().add(new BillingHistory(this.getId(), this.getAmount(), EState.PROCESSED));
+        } else {
+            throw new BillingHasBeenPaidException("", this.getId());
+        }
     }
 }

@@ -1,8 +1,9 @@
 package domain.model.bill;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class BillingHistory {
+public class BillingHistory implements Serializable {
     String id;
     BigDecimal amount;
     EState state;

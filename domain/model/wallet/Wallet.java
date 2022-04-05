@@ -13,11 +13,11 @@ public class Wallet implements Serializable {
     private BigDecimal balance;
     List<Event> events;
 
-    public Wallet(long id, long balance) {
+    public Wallet(long id, BigDecimal balance) {
         this.id = id;
-        this.balance = BigDecimal.valueOf(balance);
+        this.balance = balance;
         this.events = new ArrayList<>();
-        events.add(new Event(System.nanoTime(), System.currentTimeMillis(), EEvent.INIT));
+        events.add(new Event(System.nanoTime(), System.currentTimeMillis(), balance, EEvent.INIT));
     }
 
     public long getId() {
@@ -38,7 +38,7 @@ public class Wallet implements Serializable {
 
     public Wallet cashIn(BigDecimal amount) {
         this.balance = this.balance.add(amount);
-        this.events.add(new Event(System.nanoTime(), System.currentTimeMillis(), EEvent.CASH_IN));
+        this.events.add(new Event(System.nanoTime(), System.currentTimeMillis(), amount, EEvent.CASH_IN));
         return this;
     }
 
@@ -47,7 +47,13 @@ public class Wallet implements Serializable {
             throw new WalletPaymentException("Sorry! Not enough fund to proceed with payment.");
         }
         this.balance = this.balance.subtract(amount);
-        this.events.add(new Event(System.nanoTime(), System.currentTimeMillis(), EEvent.PAYMENT));
+        this.events.add(new Event(System.nanoTime(), System.currentTimeMillis(), amount, EEvent.CASH_IN));
+        return this;
+    }
+
+    public Wallet refund(BigDecimal amount) throws WalletPaymentException {
+        this.balance = this.balance.add(amount);
+        this.events.add(new Event(System.nanoTime(), System.currentTimeMillis(), amount, EEvent.REFUND));
         return this;
     }
 
